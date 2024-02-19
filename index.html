@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ucapan Selamat Ulang Tahun</title>
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin-top: 50px;
+        background-color: #f8f9fa; /* Warna latar belakang */
+      }
+      #birthday-message {
+        margin-top: 50px;
+        font-size: 24px;
+        animation: dance 2s infinite alternate; /* Menambahkan animasi dance */
+      }
+      #birthday-image {
+        margin-top: 20px;
+        margin-bottom: 20px; /* Jarak bawah */
+        border-radius: 50%;
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+      }
+      #ucapan-list {
+        margin-top: 50px;
+        text-align: left;
+      }
+
+      /* Animasi dance */
+      @keyframes dance {
+        0% {
+          transform: translateY(0);
+        }
+        100% {
+          transform: translateY(-10px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Audio -->
+    <audio id="background-music" autoplay loop>
+      <source src="birthday_song.mp3" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+
+    <div class="container">
+      <h1 class="mb-4 text-primary">UCAPAN ULANG TAHUN UNTUK KU ZIAN</h1>
+      <img
+        id="birthday-image"
+        src="foto_anak.jpg"
+        class="rounded-circle"
+        alt="Foto Anak"
+      />
+
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <form id="input-form">
+                <div class="form-group">
+                  <label for="sender-name">Nama Pengirim:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="sender-name"
+                    placeholder="Masukkan nama anda"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="birthday-wish">Ucapan Ulang Tahun:</label>
+                  <textarea
+                    class="form-control"
+                    id="birthday-wish"
+                    rows="4"
+                    placeholder="Tulis ucapan anda di sini..."
+                  ></textarea>
+                </div>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  onclick="submitWish()"
+                >
+                  Kirim Ucapan
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="birthday-message" class="mt-4" style="display: none">
+        <p id="wish-message"></p>
+      </div>
+
+      <div id="ucapan-list" class="mt-4">
+        <h2 class="mb-3 text-success">
+          Ucapan Selamat Ulang Tahun dari Pengunjung Lain:
+        </h2>
+        <!-- Warna teks hijau -->
+        <ul id="wish-list" class="list-group">
+          <!-- Daftar ucapan akan ditambahkan di sini -->
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS dan jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      function submitWish() {
+        var senderName = document.getElementById("sender-name").value;
+        var birthdayWish = document.getElementById("birthday-wish").value;
+
+        if (senderName.trim() === "" || birthdayWish.trim() === "") {
+          alert("Silakan isi nama pengirim dan ucapan ulang tahun!");
+          return;
+        }
+
+        var wishList = document.getElementById("wish-list");
+        var li = document.createElement("li");
+        li.className = "list-group-item";
+        li.textContent = senderName + ": " + birthdayWish;
+        wishList.appendChild(li);
+
+        document.getElementById("sender-name").value = "";
+        document.getElementById("birthday-wish").value = "";
+      }
+
+      // Contoh ucapan
+      var wishMessage = "Selamat ulang tahun yang ke-5!";
+      document.getElementById("wish-message").textContent = wishMessage;
+    </script>
+  </body>
+</html>
